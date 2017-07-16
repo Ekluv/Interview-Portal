@@ -11,7 +11,11 @@ function updateInvitation(invitationToken) {
             isOpened: true
         }, (err, doc) => {
             if (err) reject(err);
-            resolve(doc);
+            doc.getScore().then((score) => {
+                doc.score = score;
+                resolve(doc);
+            });
+            
         });
     });
 
@@ -20,10 +24,7 @@ function updateInvitation(invitationToken) {
 function sendEmailInvite(to, text) {
     var transporter = nodemailer.createTransport({
         service: 'gmail',
-        auth: {
-            user: 'youremail@gmail.com',
-            pass: 'yourpassword'
-        }
+        auth: config.emailAuth
     });
 
     var mailOptions = {

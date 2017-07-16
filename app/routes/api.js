@@ -176,7 +176,12 @@ router.route('/submit-answers')
                 .then((submissions) => {
                     return res.json({
                         submissions,
-                        invite,
+                        invite: {
+                            score: invite.score,
+                            _id: invite._id,
+                            email: invite.email,
+                            token: invite.token
+                        },
                         success: true
                     });
                 });

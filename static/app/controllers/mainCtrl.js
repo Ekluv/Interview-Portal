@@ -105,7 +105,8 @@ angular.module('myapp')
                     window.alert(response.message);
                     return;
                 }
-                location.reload();
+                $scope.score = response.invite.score;
+                $scope.problems = [];
             });
         };
 
